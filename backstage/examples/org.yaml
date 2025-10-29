@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: HEEPOKE
+spec:
+  profile:
+    displayName: HUI Dev
+    email: damon1fx@gmail.com
+  memberOf: []
