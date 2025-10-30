@@ -4,7 +4,8 @@ metadata:
   name: HUIKUB
   description: nginx on kind
   annotations:
-    backstage.io/kubernetes-id: demo-nginx
+    backstage.io/kubernetes-id: demo
+    backstage.io/kubernetes-label-selector: "backstage.io/kubernetes-id=demo-nginx"
     backstage.io/techdocs-ref: dir:../../
   tags:
   - nginx
