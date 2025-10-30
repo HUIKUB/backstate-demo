@@ -5,7 +5,7 @@ metadata:
   description: nginx on kind
   annotations:
     backstage.io/kubernetes-id: demo-nginx
-    backstage.io/techdocs-ref: dir:.
+    backstage.io/techdocs-ref: dir:../../
   tags:
   - nginx
   links:

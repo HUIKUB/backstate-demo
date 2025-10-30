@@ -1,0 +1,6 @@
+site_name: HUIKUB Docs
+nav:
+- Home: README.md
+plugins:
+- techdocs-core
+docs_dir: .
