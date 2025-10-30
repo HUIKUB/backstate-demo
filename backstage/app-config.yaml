@@ -37,14 +37,7 @@ backend:
 integrations:
   github:
   - host: github.com
-    # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
-    # about setting up the GitHub integration here: https://backstage.io/docs/integrations/github/locations#configuration
-    token: ${GITHUB_TOKEN}
-  ### Example for how to add your GitHub Enterprise instance using the API:
-  # - host: ghe.example.net
-  #   apiBaseUrl: https://ghe.example.net/api/v3
-  #   token: ${GHE_TOKEN}
-
+    token: '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'
   # proxy:
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.
@@ -112,6 +105,6 @@ kubernetes:
     clusters:
     - url: https://127.0.0.1:63536
       name: kind-dev-cluster
-      skipTLSVerify: false
+      skipTLSVerify: true
       authProvider: serviceAccount
       serviceAccountToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjkyTFNWbmJ3TjhkM3phZUZINkJlU3Y3cVJoVGJPRUx4dlZ1NEpfZkZvdVEifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNzYxODA4ODk4LCJpYXQiOjE3NjE4MDUyOTgsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiOGZkN2Q1NmItNGZhZC00ZGNmLTllNjQtNmYzZWU5MGQ4M2JjIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0Iiwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImJhY2tzdGFnZSIsInVpZCI6ImJiZjQ4MWNhLTQzMjMtNDQ0OC1iMTQxLTM4MDQyOGY3YmU1MCJ9fSwibmJmIjoxNzYxODA1Mjk4LCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpiYWNrc3RhZ2UifQ.R7KYDRjMAje2rHrIxk-Q7SQaUvxOEjp8DQymC9uN5ci5o-H1DO9AAQbhKjdJtXLSY9FgPMkQMyDGA-s_bh_rVeACmGI2FnIcwYm-lgl7YybfNYlQX0GT3ybTVkQllmN5tAXENEaQVc7FAg4JOhYC_SrBrgoq-zbI2UBk2YvmyWZjGrO_wvQivXTxZNwFlGWptBRV3kHV_b5B60wtIPN2SuJfyuqIkjC-OxPRDMzt5wR5tyZvHX9AHgWzj_MhaJFkXoP7T32viLhdyiyi0teddfU3IT8qp4mMk8ZMIOf_mNDJbn0DgRyNsXN7qUW_7qY6nvfofHO2TNb4BBxc9z7WZA'

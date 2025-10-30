@@ -3,7 +3,8 @@ kind: Component
 metadata:
   name: demo
   annotations:
-    backstage.io/kubernetes-id: demo
+    backstage.io/kubernetes-namespace: default
+    backstage.io/kubernetes-label-selector: app=demo-nginx
 spec:
   type: service
   lifecycle: experimental

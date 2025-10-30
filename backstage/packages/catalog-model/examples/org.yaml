@@ -2,6 +2,8 @@ apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
   name: huikub
+  annotations:
+    github.com/user-login: HUIKUB
 spec:
   profile:
     displayName: HUIKUB
