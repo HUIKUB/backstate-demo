@@ -38,6 +38,9 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { NotificationsPage } from '@backstage/plugin-notifications';
 import { SignalsDisplay } from '@backstage/plugin-signals';
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
+import { createTranslationMessages } from '@backstage/core-plugin-api/alpha';
+import { kubernetesReactTranslationRef } from '@backstage/plugin-kubernetes-react/alpha';
+import { kubernetesTranslationRef } from '@backstage/plugin-kubernetes/alpha';
 
 const app = createApp({
   apis,
@@ -63,14 +66,33 @@ const app = createApp({
       <SignInPage
         {...props}
         auto
-        provider={{
+        providers={['guest', {
           id: 'github-auth-provider',
           title: 'GitHub',
           message: 'Sign in using GitHub',
           apiRef: githubAuthApiRef,
-        }}
+        }]}
       />
     ),
+  },
+  __experimentalTranslations: {
+    resources: [
+      createTranslationMessages({
+        ref: kubernetesReactTranslationRef,
+        messages: {
+          'podDrawer.buttons.delete': 'Restart Pod',
+        },
+      }),
+      createTranslationMessages({
+        ref: kubernetesTranslationRef,
+        messages: {
+          'kubernetesContentPage.permissionAlert.title':
+            'Insufficient permissions',
+          'kubernetesContentPage.permissionAlert.message':
+            'You do not have permissions to view Kubernetes objects.',
+        },
+      }),
+    ],
   },
 });
 

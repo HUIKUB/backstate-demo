@@ -1,3 +1,4 @@
+# Backstage override configuration for your local development environment
 app:
   title: Scaffolded Backstage App
   baseUrl: http://localhost:3000
@@ -9,7 +10,8 @@ backend:
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
   # information on the format
-  # auth:
+  auth:
+    dangerouslyDisableDefaultAuthPolicy: true
   #   keys:
   #     - secret: ${BACKEND_SECRET}
   baseUrl: http://localhost:7007
@@ -63,16 +65,18 @@ techdocs:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
 auth:
+  environment: development
   providers:
-
     github:
       development:
-        clientId: 'Ov23liXixkycet58rrPO'
-        clientSecret: '6cdd519a9c978ba68929d85df59cfe833ae52118'
+        clientId: 'Ov23lixOChTPPiGctngN'
+        clientSecret: '92a40028733d4566fc8508d13fcf2cce63e68a52'
+        dangerouslyAllowOutsideDevelopment: true
         signIn:
           resolvers:
           - resolver: usernameMatchingUserEntityName
-          dangerouslyAllowSignInWithoutUserInCatalog: true
+          options:
+            defaultNamespace: default
 
 catalog:
   import:
@@ -82,17 +86,32 @@ catalog:
   - allow: [ Component, System, API, Resource, Location ]
   locations:
   - type: file
-    target: ../../examples/entities.yaml
+    target: ../catalog-model/examples/entities.yaml
 
   - type: file
-    target: ../../examples/template/template.yaml
+    target: ../catalog-model/examples/template/template.yaml
     rules:
     - allow: [ Template ]
 
   - type: file
-    target: ../../examples/org.yaml
+    target: ../catalog-model/examples/org.yaml
     rules:
     - allow: [ User, Group ]
 
 permission:
   enabled: true
+
+kubernetes:
+  frontend:
+    podDelete:
+      enabled: true
+  serviceLocatorMethod:
+    type: 'multiTenant'
+  clusterLocatorMethods:
+  - type: 'config'
+    clusters:
+    - url: https://127.0.0.1:63536
+      name: kind-dev-cluster
+      skipTLSVerify: false
+      authProvider: serviceAccount
+      serviceAccountToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjkyTFNWbmJ3TjhkM3phZUZINkJlU3Y3cVJoVGJPRUx4dlZ1NEpfZkZvdVEifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNzYxODA4ODk4LCJpYXQiOjE3NjE4MDUyOTgsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiOGZkN2Q1NmItNGZhZC00ZGNmLTllNjQtNmYzZWU5MGQ4M2JjIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0Iiwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImJhY2tzdGFnZSIsInVpZCI6ImJiZjQ4MWNhLTQzMjMtNDQ0OC1iMTQxLTM4MDQyOGY3YmU1MCJ9fSwibmJmIjoxNzYxODA1Mjk4LCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpiYWNrc3RhZ2UifQ.R7KYDRjMAje2rHrIxk-Q7SQaUvxOEjp8DQymC9uN5ci5o-H1DO9AAQbhKjdJtXLSY9FgPMkQMyDGA-s_bh_rVeACmGI2FnIcwYm-lgl7YybfNYlQX0GT3ybTVkQllmN5tAXENEaQVc7FAg4JOhYC_SrBrgoq-zbI2UBk2YvmyWZjGrO_wvQivXTxZNwFlGWptBRV3kHV_b5B60wtIPN2SuJfyuqIkjC-OxPRDMzt5wR5tyZvHX9AHgWzj_MhaJFkXoP7T32viLhdyiyi0teddfU3IT8qp4mMk8ZMIOf_mNDJbn0DgRyNsXN7qUW_7qY6nvfofHO2TNb4BBxc9z7WZA'

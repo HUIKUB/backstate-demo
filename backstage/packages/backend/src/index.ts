@@ -1,16 +1,4 @@
 import { createBackend } from '@backstage/backend-defaults';
-import { createBackendModule } from '@backstage/backend-plugin-api';
-import { githubAuthenticator } from '@backstage/plugin-auth-backend-module-github-provider';
-import {
-  authProvidersExtensionPoint,
-  createOAuthProviderFactory,
-} from '@backstage/plugin-auth-node';
-import {
-  stringifyEntityRef,
-  DEFAULT_NAMESPACE,
-} from '@backstage/catalog-model';
-// import { createRouter, providers } from '@backstage/plugin-auth-backend';
-// import { PluginEnvironment } from '../types';
 
 const backend = createBackend();
 
@@ -67,72 +55,6 @@ backend.add(import('@backstage/plugin-kubernetes-backend'));
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('@backstage/plugin-signals-backend'));
 
-// export default async function createPlugin(env: PluginEnvironment) {
-//   return await createRouter({
-//     logger: env.logger,
-//     config: env.config,
-//     providerFactories: {
-//       github: providers.github.create({
-//         // นี่คือจุดสำคัญ: signIn.resolver
-//         signIn: {
-//           resolver(_info, ctx) {
-//             // บังคับ map ทุกคนที่ล็อกอินผ่าน GitHub -> user:default/my-user
-//             const userRef = 'user:default/my-user'; // ต้องตรงกับ metadata.name ใน org.yaml
-//             return ctx.issueToken({
-//               claims: {
-//                 sub: userRef, // ตัวตนหลักของคนนี้ใน Backstage
-//                 ent: [userRef], // กลุ่ม ownership/entitlements ขั้นต่ำ
-//               },
-//             });
-//           },
-//         },
-//       }),
-//     },
-//   });
-// }
-
-// const customAuth = createBackendModule({
-//   pluginId: 'auth',
-//   moduleId: 'custom-auth-provider',
-//   register(reg) {
-//     reg.registerInit({
-//       deps: { providers: authProvidersExtensionPoint },
-//       async init({ providers }) {
-//         providers.registerProvider({
-//           providerId: 'github',
-//           factory: createOAuthProviderFactory({
-//             authenticator: githubAuthenticator,
-//             async signInResolver(info, ctx) {
-//               const {
-//                 profile: { email },
-//               } = info;
-
-//               if (!email) {
-//                 throw new Error('User profile contained no email');
-//               }
-
-//               const [name] = email.split('@');
-
-//               const userEntity = stringifyEntityRef({
-//                 kind: 'User',
-//                 name: name,
-//                 namespace: DEFAULT_NAMESPACE,
-//               });
-//               return ctx.issueToken({
-//                 claims: {
-//                   sub: userEntity,
-//                   ent: [userEntity],
-//                 },
-//               });
-//             },
-//           }),
-//         });
-//       },
-//     });
-//   },
-// });
-
-// backend.add(customAuth);
 backend.add(import('@backstage/plugin-auth-backend-module-github-provider'));
 
 backend.start();

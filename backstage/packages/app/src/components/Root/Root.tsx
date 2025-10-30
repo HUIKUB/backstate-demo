@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Button } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
@@ -28,6 +28,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { MyGroupsSidebarItem } from '@backstage/plugin-org';
 import GroupIcon from '@material-ui/icons/People';
 import { NotificationsSidebarItem } from '@backstage/plugin-notifications';
+import { useApi, identityApiRef } from '@backstage/core-plugin-api';
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -55,6 +56,11 @@ const SidebarLogo = () => {
       </Link>
     </div>
   );
+};
+
+const SignOutButton = () => {
+  const identityApi = useApi(identityApiRef);
+  return <Button onClick={() => identityApi.signOut()}>Sign out</Button>;
 };
 
 export const Root = ({ children }: PropsWithChildren<{}>) => (
@@ -90,7 +96,9 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         label="Settings"
         icon={<UserSettingsSignInAvatar />}
         to="/settings"
+      
       >
+        <SignOutButton />
         <SidebarSettings />
       </SidebarGroup>
     </Sidebar>

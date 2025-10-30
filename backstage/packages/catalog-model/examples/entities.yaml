@@ -1,10 +1,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: demo
+  name: HUIKUB
+  description: nginx on kind
   annotations:
-    backstage.io/kubernetes-id: demo
+    backstage.io/kubernetes-id: demo-nginx
 spec:
   type: service
   lifecycle: experimental
-  owner: user:default/HUIKUB
+  owner: HUIKUB

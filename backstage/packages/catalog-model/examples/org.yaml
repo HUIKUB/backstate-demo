@@ -1,9 +1,9 @@
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: HEEPOKE
+  name: huikub
 spec:
   profile:
-    displayName: HUI Dev
-    email: damon1fx@gmail.com
+    displayName: HUIKUB
+    email: pornpitak.a@epic-consulting.net
   memberOf: []

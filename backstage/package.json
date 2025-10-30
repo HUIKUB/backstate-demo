@@ -50,5 +50,10 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@4.4.1"
+  "packageManager": "yarn@4.4.1",
+  "dependencies": {
+    "@backstage/backend-plugin-api": "^1.4.4",
+    "@backstage/catalog-model": "^1.7.5",
+    "@backstage/plugin-kubernetes-react": "^0.5.12"
+  }
 }
