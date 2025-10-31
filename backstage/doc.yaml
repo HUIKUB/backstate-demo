@@ -5,10 +5,14 @@ metadata:
   description: Backstage documentation test
 spec:
   type: openapi
-  lifecycle: service
+  lifecycle: experimental
   owner: HUIKUB
-  definition:
+  definition: |
     openapi: 3.1.0
+    info:
+      title: API
+      description: Public API service
+      version: 1.0.0
     paths:
       /:
         get:
@@ -18,13 +22,6 @@ spec:
             "200":
               description: ""
           tags:
-          - App
-    info:
-      title: API
-      description: Public API service
-      version: 1.0.0
-      contact: {}
-    tags: []
-    servers: []
+            - App
     components:
       schemas: {}

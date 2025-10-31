@@ -7,37 +7,29 @@ organization:
   name: My Company
 
 backend:
-  # Used for enabling authentication, secret is shared by all backend plugins
-  # See https://backstage.io/docs/auth/service-to-service-auth for
-  # information on the format
   auth:
     dangerouslyDisableDefaultAuthPolicy: true
-  #   keys:
-  #     - secret: ${BACKEND_SECRET}
   baseUrl: http://localhost:7007
   listen:
     port: 7007
-    # Uncomment the following host directive to bind to specific interfaces
-    # host: 127.0.0.1
   csp:
-    connect-src: [ "'self'", 'http:', 'https:' ]
-    # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
-    # Default Helmet Content-Security-Policy values can be removed by setting the key to false
+    connect-src: [ "'self'", "http:", "https:" ]
   cors:
     origin: http://localhost:3000
     methods: [ GET, HEAD, PATCH, POST, PUT, DELETE ]
     credentials: true
-  # This is for local development only, it is not recommended to use this in production
-  # The production database configuration is stored in app-config.production.yaml
+  reading:
+    allow:
+    - host: raw.githubusercontent.com
+
   database:
     client: better-sqlite3
     connection: ':memory:'
-  # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
   github:
   - host: github.com
-    token: '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'
+    token: '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'
   # proxy:
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.
