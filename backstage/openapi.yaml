@@ -1,0 +1,30 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: doc
+  description: Backstage documentation test
+spec:
+  type: openapi
+  lifecycle: service
+  owner: HUIKUB
+  definition:
+    openapi: 3.1.0
+    paths:
+      /:
+        get:
+          operationId: AppController_getHello
+          parameters: []
+          responses:
+            "200":
+              description: ""
+          tags:
+          - App
+    info:
+      title: API
+      description: Public API service
+      version: 1.0.0
+      contact: {}
+    tags: []
+    servers: []
+    components:
+      schemas: {}
