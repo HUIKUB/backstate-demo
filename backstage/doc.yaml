@@ -8,4 +8,20 @@ spec:
   lifecycle: experimental
   owner: HUIKUB
   definition: |
-    $text: 'https://raw.githubusercontent.com/HUIKUB/backstate-nestjs-demo/refs/heads/main/openapi/openapi.json'
+    openapi: 3.1.0
+    info:
+      title: API
+      description: Public API service
+      version: 1.0.0
+    paths:
+      /:
+        get:
+          operationId: AppController_getHello
+          parameters: []
+          responses:
+            "200":
+              description: ""
+          tags:
+            - App
+    components:
+      schemas: {}
