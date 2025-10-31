@@ -1,12 +1,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: HUIKUB
-  description: nginx on kind
+  name: demo-nginx
+  description: NGINX on kind
   annotations:
-    backstage.io/kubernetes-id: demo
-    backstage.io/kubernetes-label-selector: "backstage.io/kubernetes-id=demo-nginx"
-    backstage.io/techdocs-ref: dir:../../
+    backstage.io/kubernetes-id: demo-nginx
+    backstage.io/techdocs-ref: dir:.
   tags:
   - nginx
   links:
@@ -17,4 +16,24 @@ metadata:
 spec:
   type: service
   lifecycle: experimental
-  owner: HUIKUB
+  owner: user:default/huikub
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nestjs-demo
+  description: NestJS demo service
+  annotations:
+    backstage.io/kubernetes-id: demo-nestjs
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: HUIKUB/backstate-nestjs-demo
+  tags:
+  - nestjs
+  links:
+  - url: https://nestjs.com
+    title: NestJS
+    type: website
+spec:
+  type: service
+  lifecycle: experimental
+  owner: user:default/huikub

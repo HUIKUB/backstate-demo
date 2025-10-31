@@ -52,7 +52,7 @@ import {
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
-
+import { EntityGithubActionsContent } from '@backstage/plugin-github-actions';
 import {
   EntityKubernetesContent,
   isKubernetesAvailable,
@@ -67,31 +67,11 @@ const techdocsContent = (
 );
 
 const cicdContent = (
-  // This is an example of how you can implement your company's logic in entity page.
-  // You can for example enforce that all components of type 'service' should use GitHubActions
   <EntitySwitch>
-    {/*
-      Here you can add support for different CI/CD services, for example
-      using @backstage-community/plugin-github-actions as follows:
-      <EntitySwitch.Case if={isGithubActionsAvailable}>
-        <EntityGithubActionsContent />
-      </EntitySwitch.Case>
-     */}
     <EntitySwitch.Case>
-      <EmptyState
-        title="No CI/CD available for this entity"
-        missing="info"
-        description="You need to add an annotation to your component if you want to enable CI/CD for it. You can read more about annotations in Backstage by clicking the button below."
-        action={
-          <Button
-            variant="contained"
-            color="primary"
-            href="https://backstage.io/docs/features/software-catalog/well-known-annotations"
-          >
-            Read more
-          </Button>
-        }
-      />
+      <EntityLayout.Route path="/ci-cd" title="CI/CD">
+        <EntityGithubActionsContent />
+      </EntityLayout.Route>
     </EntitySwitch.Case>
   </EntitySwitch>
 );
@@ -153,7 +133,7 @@ const serviceEntityPage = (
       {cicdContent}
     </EntityLayout.Route>
 
-   <EntityLayout.Route path="/kubernetes" title="Kubernetes">
+    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent refreshIntervalMs={30000} />
     </EntityLayout.Route>
 
