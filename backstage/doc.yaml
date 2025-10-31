@@ -8,4 +8,4 @@ spec:
   lifecycle: experimental
   owner: HUIKUB
   definition: |
-    $yaml: 'https://raw.githubusercontent.com/HUIKUB/backstate-nestjs-demo/refs/heads/main/openapi/openapi.yaml'
+    $text: 'https://raw.githubusercontent.com/HUIKUB/backstate-nestjs-demo/refs/heads/main/openapi/openapi.json'
