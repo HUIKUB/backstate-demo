@@ -29,7 +29,7 @@ backend:
 integrations:
   github:
   - host: github.com
-    token: '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'
+    token: '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'
   # proxy:
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.

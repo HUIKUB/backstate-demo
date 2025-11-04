@@ -6,7 +6,8 @@ metadata:
   annotations:
     backstage.io/kubernetes-id: demo
     backstage.io/kubernetes-label-selector: "backstage.io/kubernetes-id=demo-nginx"
-    backstage.io/techdocs-ref: dir:../../
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/project-slug: HUIKUB/backstate-nestjs-demo
   tags:
   - nginx
   links:
