@@ -56,5 +56,8 @@ backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('@backstage/plugin-signals-backend'));
 
 backend.add(import('@backstage/plugin-auth-backend-module-github-provider'));
+backend.add(import('@backstage/plugin-events-backend-module-github'));
+
+backend.add(import('@backstage/plugin-auth-backend-module-microsoft-provider'));
 
 backend.start();

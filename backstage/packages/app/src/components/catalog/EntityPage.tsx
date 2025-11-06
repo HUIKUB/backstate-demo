@@ -147,10 +147,9 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
     </EntityLayout.Route>
-
-    {/* <EntityLayout.Route path="/ci-cd" title="CI/CD">
+    <EntityLayout.Route path="/ci-cd" title="CI/CD">
       {cicdContent}
-    </EntityLayout.Route> */}
+    </EntityLayout.Route>
     <EntityLayout.Route
       path="/github-actions"
       title="GitHub Actions"

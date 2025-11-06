@@ -4,10 +4,10 @@ metadata:
   name: HUIKUB
   description: nginx on kind
   annotations:
+    github.com/project-slug: HUIKUB/backstate-demo
     backstage.io/kubernetes-id: demo
-    backstage.io/kubernetes-label-selector: "backstage.io/kubernetes-id=demo-nginx"
-    backstage.io/techdocs-ref: dir:.
-    backstage.io/project-slug: HUIKUB/backstate-nestjs-demo
+    backstage.io/kubernetes-label-selector: backstage.io/kubernetes-id=demo-nginx
+    backstage.io/techdocs-ref: dir:./docs
   tags:
   - nginx
   links:

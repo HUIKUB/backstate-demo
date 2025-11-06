@@ -23,21 +23,24 @@ backend:
     - host: raw.githubusercontent.com
 
   database:
-    client: better-sqlite3
-    connection: ':memory:'
+    client: pg
+    connection:
+      host: 127.0.0.1
+      port: 5432
+      user: myuser
+      password: mypassword
 
 integrations:
   github:
   - host: github.com
-    token: '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'
-  # proxy:
-  ### Example for how to add a proxy endpoint for the frontend.
-  ### A typical reason to do this is to handle HTTPS and CORS for internal services.
-  # endpoints:
-  #   '/test':
-  #     target: 'https://example.com'
-  #     changeOrigin: true
+    token: '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'
 
+proxy:
+  '/github/api':
+    target: https://api.github.com
+    headers:
+      Authorization: 'token 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'
+      Accept: 'application/vnd.github.v3+json'
   # Reference documentation http://backstage.io/docs/features/techdocs/configuration
   # Note: After experimenting with basic setup, use CI/CD to generate docs
   # and an external cloud storage when deploying TechDocs for production use-case.
@@ -98,6 +101,6 @@ kubernetes:
     - url: https://127.0.0.1:63536
       name: kind-dev-cluster
       skipTLSVerify: true
-      skipMetricsLookup: true
+      skipMetricsLookup: false
       authProvider: serviceAccount
       serviceAccountToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjkyTFNWbmJ3TjhkM3phZUZINkJlU3Y3cVJoVGJPRUx4dlZ1NEpfZkZvdVEifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNzkzMzQ3MjA4LCJpYXQiOjE3NjE4MTEyMDgsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiODQyMWE3N2YtNDE3Yy00Y2MzLTkwNmUtYTcwMDJhMzYxNmRkIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0Iiwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImJhY2tzdGFnZSIsInVpZCI6ImJiZjQ4MWNhLTQzMjMtNDQ0OC1iMTQxLTM4MDQyOGY3YmU1MCJ9fSwibmJmIjoxNzYxODExMjA4LCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpiYWNrc3RhZ2UifQ.tUnCV7M1ZafPGbgf4PlDuMWfydVfNLG3VfW-L5-rtm588Lrqro2O0SbHspTn-jC7cvpmkN4-v3yAJMoXSBb8M-Yvrg38lwjOuq6Vw4d0antPoudYIszyyCHfrtg-MQTOxF8W0N3EHY6kqfaVufFReQv4O3PXehBi_otLx9Qq0qQYgu05T4xDzBCtN2T-oyt8FOj2N28CZMiYPmSx-UIjKJSDPtg7U3o0F4hARJSqqWuQv7YZzuCCjKb-HzoIICl2RtwxU7yUviCF2eG8P1NVg3Lj594fv-2zkD8p9NiGLK_HrZ6yVVeb9DmUZeAWVE9SM2lEPAkMB50-IjGx1FSZTw'

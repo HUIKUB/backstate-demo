@@ -114,7 +114,7 @@ const routes = (
       path="/docs/:namespace/:kind/:name/*"
       element={<TechDocsReaderPage />}
     >
-      <TechDocsAddons>
+     <TechDocsAddons>
         <ReportIssue />
       </TechDocsAddons>
     </Route>
