@@ -155,7 +155,8 @@ const serviceEntityPage = (
       title="GitHub Actions"
       if={isGithubActionsAvailable}
     >
-      <EntityGithubActionsContent />
+      {/* <GithubActionsWebhook /> */}
+       <EntityGithubActionsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">

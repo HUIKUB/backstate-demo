@@ -35,17 +35,16 @@ integrations:
   - host: github.com
     token: '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'
 
+githubWebhook:
+  secret: 'e4f9d8b9c23c4c018d264c72e8b953f1e7d9b5a2b3c4d5e6f7a8b9c0d1e2f3'
+
 proxy:
   '/github/api':
     target: https://api.github.com
     headers:
       Authorization: 'token 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'
       Accept: 'application/vnd.github.v3+json'
-  # Reference documentation http://backstage.io/docs/features/techdocs/configuration
-  # Note: After experimenting with basic setup, use CI/CD to generate docs
-  # and an external cloud storage when deploying TechDocs for production use-case.
-  # https://backstage.io/docs/features/techdocs/how-to-guides#how-to-migrate-from-techdocs-basic-to-recommended-deployment-approach
-techdocs:
+
   builder: 'local' # Alternatives - 'external'
   generator:
     runIn: 'docker' # Alternatives - 'local'

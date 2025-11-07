@@ -41,6 +41,7 @@ import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { createTranslationMessages } from '@backstage/core-plugin-api/alpha';
 import { kubernetesReactTranslationRef } from '@backstage/plugin-kubernetes-react/alpha';
 import { kubernetesTranslationRef } from '@backstage/plugin-kubernetes/alpha';
+import { Router as GithubActionsRouter } from '@backstage/plugin-github-actions';
 
 const app = createApp({
   apis,
@@ -109,12 +110,13 @@ const routes = (
     >
       {entityPage}
     </Route>
+    <Route path="/github-actions" element={<GithubActionsRouter />} />
     <Route path="/docs" element={<TechDocsIndexPage />} />
     <Route
       path="/docs/:namespace/:kind/:name/*"
       element={<TechDocsReaderPage />}
     >
-     <TechDocsAddons>
+      <TechDocsAddons>
         <ReportIssue />
       </TechDocsAddons>
     </Route>
