@@ -27,16 +27,16 @@ backend:
     connection:
       host: 127.0.0.1
       port: 5432
-      user: myuser
-      password: mypassword
+      user: backstage
+      password: backstage
 
 integrations:
   github:
   - host: github.com
     token: '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'
 
-githubWebhook:
-  secret: 'e4f9d8b9c23c4c018d264c72e8b953f1e7d9b5a2b3c4d5e6f7a8b9c0d1e2f3'
+# githubWebhook:
+#   secret: 'e4f9d8b9c23c4c018d264c72e8b953f1e7d9b5a2b3c4d5e6f7a8b9c0d1e2f3'
 
 proxy:
   '/github/api':
@@ -44,6 +44,14 @@ proxy:
     headers:
       Authorization: 'token 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'
       Accept: 'application/vnd.github.v3+json'
+  '/prometheus/api':
+    target: 'http://localhost:9090/api/v1/'
+    changeOrigin: true
+    secure: false
+  # '/grafana/api':
+  #   target: https://grafana.host/
+  #   headers:
+  #     Authorization: Bearer ${GRAFANA_TOKEN}
 
   builder: 'local' # Alternatives - 'external'
   generator:
@@ -103,3 +111,11 @@ kubernetes:
       skipMetricsLookup: false
       authProvider: serviceAccount
       serviceAccountToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjkyTFNWbmJ3TjhkM3phZUZINkJlU3Y3cVJoVGJPRUx4dlZ1NEpfZkZvdVEifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNzkzMzQ3MjA4LCJpYXQiOjE3NjE4MTEyMDgsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiODQyMWE3N2YtNDE3Yy00Y2MzLTkwNmUtYTcwMDJhMzYxNmRkIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0Iiwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImJhY2tzdGFnZSIsInVpZCI6ImJiZjQ4MWNhLTQzMjMtNDQ0OC1iMTQxLTM4MDQyOGY3YmU1MCJ9fSwibmJmIjoxNzYxODExMjA4LCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpiYWNrc3RhZ2UifQ.tUnCV7M1ZafPGbgf4PlDuMWfydVfNLG3VfW-L5-rtm588Lrqro2O0SbHspTn-jC7cvpmkN4-v3yAJMoXSBb8M-Yvrg38lwjOuq6Vw4d0antPoudYIszyyCHfrtg-MQTOxF8W0N3EHY6kqfaVufFReQv4O3PXehBi_otLx9Qq0qQYgu05T4xDzBCtN2T-oyt8FOj2N28CZMiYPmSx-UIjKJSDPtg7U3o0F4hARJSqqWuQv7YZzuCCjKb-HzoIICl2RtwxU7yUviCF2eG8P1NVg3Lj594fv-2zkD8p9NiGLK_HrZ6yVVeb9DmUZeAWVE9SM2lEPAkMB50-IjGx1FSZTw'
+
+prometheus:
+  proxyPath: /prometheus/api
+  uiUrl: http://localhost:9090
+
+grafana:
+  domain: https://monitoring.company.com
+  unifiedAlerting: false

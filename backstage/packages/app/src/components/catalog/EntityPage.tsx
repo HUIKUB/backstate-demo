@@ -49,7 +49,6 @@ import {
   RELATION_PART_OF,
   RELATION_PROVIDES_API,
 } from '@backstage/catalog-model';
-
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
@@ -61,6 +60,11 @@ import {
   EntityGithubActionsContent,
   isGithubActionsAvailable,
 } from '@backstage-community/plugin-github-actions';
+import {
+  EntityPrometheusContent,
+  EntityPrometheusAlertCard,
+  EntityPrometheusGraphCard,
+} from '@roadiehq/backstage-plugin-prometheus';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -139,6 +143,12 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+    <Grid item md={8}>
+      <EntityPrometheusAlertCard />
+    </Grid>
+    <Grid item md={6}>
+      <EntityPrometheusGraphCard />
+    </Grid>
   </Grid>
 );
 
@@ -156,11 +166,15 @@ const serviceEntityPage = (
       if={isGithubActionsAvailable}
     >
       {/* <GithubActionsWebhook /> */}
-       <EntityGithubActionsContent />
+      <EntityGithubActionsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent refreshIntervalMs={30000} />
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/prometheus" title="Prometheus">
+      <EntityPrometheusContent />
+      {/* <PrometheusMetricsCard /> */}
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/api" title="API">

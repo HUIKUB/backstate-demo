@@ -60,6 +60,6 @@ backend.add(import('@backstage/plugin-events-backend-module-github'));
 
 backend.add(import('@backstage/plugin-auth-backend-module-microsoft-provider'));
 
-backend.add(import('./plugins/githubWebhook'));
+// backend.add(import('./plugins/githubWebhook'));
 
 backend.start();
