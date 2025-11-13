@@ -1,7 +1,20 @@
-# Backstage override configuration for your local development environment
 app:
   title: Scaffolded Backstage App
   baseUrl: http://localhost:3000
+  extensions:
+  - entity-card:grafana/dashboards
+  - entity-card:grafana/dashboards:
+      config:
+        filter: kind:component,api,group
+  - entity-card:grafana/alerts
+  - entity-card:grafana/alerts:
+      config:
+        filter: kind:component,api,group
+
+# search:
+#   engine: elasticsearch
+#   elasticsearch:
+#     node: http://localhost:9200
 
 organization:
   name: My Company
@@ -48,10 +61,12 @@ proxy:
     target: 'http://localhost:9090/api/v1/'
     changeOrigin: true
     secure: false
-  # '/grafana/api':
-  #   target: https://grafana.host/
-  #   headers:
-  #     Authorization: Bearer ${GRAFANA_TOKEN}
+  '/grafana/api':
+    target: 'http://localhost:3001'
+    headers:
+      Authorization: 'Bearer glsa_LvxHWk4247h6UnsCwFAPTmlq6t4U0PYn_fabda3fd'
+    changeOrigin: true
+    secure: false
 
   builder: 'local' # Alternatives - 'external'
   generator:
@@ -72,6 +87,18 @@ auth:
           - resolver: usernameMatchingUserEntityName
           options:
             defaultNamespace: default
+
+# search:
+#   elasticsearch:
+#     node: http://localhost:9200
+#     auth:
+#       username: elastic
+#       password: changeme
+#     batchSize: 100
+#     indexPrefix: myprefix-
+#     queryOptions:
+#       fuzziness: AUTO
+#       prefixLength: 3
 
 catalog:
   import:
@@ -117,5 +144,12 @@ prometheus:
   uiUrl: http://localhost:9090
 
 grafana:
-  domain: https://monitoring.company.com
-  unifiedAlerting: false
+  domain: http://localhost:3001
+  search:
+    usePostgresExpressions: true
+
+# elasticsearch:
+#   baseUrl: http://localhost:9200
+
+# kibana:
+#   baseUrl: http://localhost:5601

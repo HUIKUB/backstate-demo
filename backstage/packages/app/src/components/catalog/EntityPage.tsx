@@ -51,7 +51,6 @@ import {
 } from '@backstage/catalog-model';
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
-
 import {
   EntityKubernetesContent,
   isKubernetesAvailable,
@@ -65,6 +64,13 @@ import {
   EntityPrometheusAlertCard,
   EntityPrometheusGraphCard,
 } from '@roadiehq/backstage-plugin-prometheus';
+import {
+  EntityGrafanaDashboardsCard,
+  EntityOverviewDashboardViewer,
+  isDashboardSelectorAvailable,
+  isOverviewDashboardAvailable,
+  EntityGrafanaAlertsCard
+} from '@backstage-community/plugin-grafana';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -136,7 +142,9 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
-
+    <Grid item md={6}>
+      <EntityGrafanaAlertsCard />
+    </Grid>
     <Grid item md={4} xs={12}>
       <EntityLinksCard />
     </Grid>
@@ -176,7 +184,23 @@ const serviceEntityPage = (
       <EntityPrometheusContent />
       {/* <PrometheusMetricsCard /> */}
     </EntityLayout.Route>
-
+    <EntityLayout.Route
+      path="/grafana"
+      title="Grafana"
+      if={entity =>
+        Boolean(isDashboardSelectorAvailable(entity)) ||
+        Boolean(isOverviewDashboardAvailable(entity))
+      }
+    >
+      <Grid container spacing={3}>
+        {/* <Grid item xs={12}>
+          <EntityOverviewDashboardViewer />
+        </Grid> */}
+        <Grid item xs={12}>
+          <EntityGrafanaDashboardsCard />
+        </Grid>
+      </Grid>
+    </EntityLayout.Route>
     <EntityLayout.Route path="/api" title="API">
       <Grid container spacing={3} alignItems="stretch">
         <Grid item md={6}>
@@ -252,7 +276,6 @@ const defaultEntityPage = (
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
     </EntityLayout.Route>
-
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
