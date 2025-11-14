@@ -5,6 +5,7 @@ metadata:
   name: example-nodejs-template
   title: Example Node.js Template
   description: An example template for the scaffolder that creates a simple Node.js service
+
 spec:
   owner: HUIKUB
   type: service
@@ -13,14 +14,18 @@ spec:
   - title: Fill in some steps
     required:
     - name
+    - repoName
     properties:
       name:
         title: Name
         type: string
         description: Unique name of the component
         ui:autofocus: true
-        ui:options:
-          rows: 5
+      repoName:
+        title: Repository Name
+        type: string
+        description: Repository name to create on GitHub
+
   - title: Approver Info
     properties:
       approver:
@@ -37,30 +42,13 @@ spec:
       values:
         name: ${{ parameters.name }}
 
-  - id: create-pr
-    name: Create PR Request for Approval
-    action: publish:github:pull-request
+  - id: publish
+    name: Publish to GitHub
+    action: publish:github
     input:
-      repoUrl: github.com?repo=service-requests&owner=myorg
-      title: '[APPROVAL NEEDED] Request to create service: ${{ parameters.name }}'
-      branchName: 'request-${{ parameters.name }}'
-      description: |
-        Request to create service: `${{ parameters.name }}`
-
-        Please review and approve.
-
-        Approver: @${{ parameters.approver }}
-
-  - id: notify
-    name: Notify
-    action: notification:send
-    input:
-      recipients: entity
-      entityRefs:
-      - user:default/${{ parameters.approver }}
-      title: 'Awaiting Approval'
-      info: 'A PR has been created. Please approve to proceed.'
-      severity: 'normal'
+      repoUrl: github.com?owner=HUIKUB&repo=${{ parameters.repoName }}
+      defaultBranch: main
+      description: My service scaffolded by Backstage
 
   output:
     links:

@@ -46,7 +46,7 @@ backend:
 integrations:
   github:
   - host: github.com
-    token: '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'
+    token: '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'
 
 # githubWebhook:
 #   secret: 'e4f9d8b9c23c4c018d264c72e8b953f1e7d9b5a2b3c4d5e6f7a8b9c0d1e2f3'
@@ -55,7 +55,7 @@ proxy:
   '/github/api':
     target: https://api.github.com
     headers:
-      Authorization: 'token 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'
+      Authorization: 'token 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'
       Accept: 'application/vnd.github.v3+json'
   '/prometheus/api':
     target: 'http://localhost:9090/api/v1/'
