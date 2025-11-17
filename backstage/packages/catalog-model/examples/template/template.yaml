@@ -1,17 +1,15 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
-
 metadata:
-  name: example-nodejs-template
-  title: Example Node.js Template
-  description: An example template for the scaffolder that creates a simple Node.js service
-
+  name: nodejs-service-template
+  title: NodeJS Service with Approval
+  description: This Node.js template includes a full CI/CD pipeline, approval gate, and GitHub repo publishing.
 spec:
   owner: HUIKUB
   type: service
 
   parameters:
-  - title: Fill in some steps
+  - title: Service Info
     required:
     - name
     - repoName
@@ -19,19 +17,17 @@ spec:
       name:
         title: Name
         type: string
-        description: Unique name of the component
-        ui:autofocus: true
       repoName:
         title: Repository Name
         type: string
-        description: Repository name to create on GitHub
-
   - title: Approver Info
+    required:
+    - approver
     properties:
       approver:
         title: Approver
         type: string
-        description: GitHub username of the approver
+        description: GitHub username or email of approver
 
   steps:
   - id: fetch-base
@@ -42,6 +38,24 @@ spec:
       values:
         name: ${{ parameters.name }}
 
+  - id: notify
+    name: Notify Approver
+    action: notification:send
+    input:
+      recipients: entity
+      entityRefs:
+      - user:default/${{ parameters.approver }}
+      title: "Approval Needed"
+      info: "Please approve manually in system (e.g., send Slack/Discord or Email)"
+      severity: 'high'
+
+  - id: wait-for-approval
+    name: Await Approval
+    action: wait:template
+    input:
+      reason: "Waiting for manual approval to continue creating the repository"
+      timeout: 3600 # wait 1 hour max
+
   - id: publish
     name: Publish to GitHub
     action: publish:github
@@ -51,6 +65,9 @@ spec:
       description: My service scaffolded by Backstage
 
   output:
+    text:
+    - "Here is your service workflow:"
+    - "![Workflow](https://raw.githubusercontent.com/my-org/templates/main/content/assets/workflow-diagram.png)"
     links:
-    - title: Approval PR
-      url: ${{ steps['create-pr'].output.remoteUrl }}
+    - title: Repository
+      url: ${{ steps['publish'].output.remoteUrl }}
